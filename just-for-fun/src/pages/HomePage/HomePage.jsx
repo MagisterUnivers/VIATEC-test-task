@@ -15,7 +15,6 @@ export const HomePage = () => {
 
 	return (
 		<>
-			<Button text="Add task" onClick={() => setIsModalActive(true)} />
 			{isModalActive && (
 				<MyModal
 					isModalActive={isModalActive}

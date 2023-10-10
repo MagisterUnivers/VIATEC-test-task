@@ -7,8 +7,8 @@ export const Button = ({
 	margintop = '0px',
 	onClick,
 	type = 'button',
-	width = '100%',
-	height = '60px',
+	width = '0px',
+	height = '0px',
 	variant,
 	icon
 }) => {

@@ -1,14 +1,20 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import { Button } from '../Button/Button';
+import { useState } from 'react';
+import { MyModal } from '../Modal/Modal';
 
 const Header = () => {
+	const location = useLocation();
+	const [isModalActive, setIsModalActive] = useState(false);
+
 	return (
 		<nav className="navbar navbar-expand-lg navbar-dark bg-primary">
 			<div className="container">
 				<Link to="/" className="navbar-brand">
-					My Website
+					Task Manager
 				</Link>
 
-				<button
+				{/* <button
 					className="navbar-toggler"
 					type="button"
 					data-bs-toggle="collapse"
@@ -18,10 +24,10 @@ const Header = () => {
 					aria-label="Toggle navigation"
 				>
 					<span className="navbar-toggler-icon"></span>
-				</button>
+				</button> */}
 
 				<div className="collapse navbar-collapse" id="navbarNav">
-					<ul className="navbar-nav ml-auto">
+					<ul className="navbar-nav ml-auto" style={{ alignItems: 'center' }}>
 						<li className="nav-item">
 							<Link to="/main/home" className="nav-link">
 								Home
@@ -32,9 +38,23 @@ const Header = () => {
 								Tasks
 							</Link>
 						</li>
+						{location.pathname === '/main/tasks' && (
+							<li>
+								<Button
+									text="Add task"
+									onClick={() => setIsModalActive(true)}
+								/>
+							</li>
+						)}
 					</ul>
 				</div>
 			</div>
+			{isModalActive && (
+				<MyModal
+					isModalActive={isModalActive}
+					setActive={setIsModalActive}
+				></MyModal>
+			)}
 		</nav>
 	);
 };
