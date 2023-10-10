@@ -1,1 +1,1 @@
-export const BASENAME = '/test';
+export const BASENAME = '/';

@@ -1,11 +1,16 @@
 import React, { useState } from 'react';
 import { Modal, Form, Button } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import { addTask } from '../../redux/Tasks/TasksSlice';
+import { nanoid } from '@reduxjs/toolkit';
 
 export const MyModal = ({ isModalActive, setActive }) => {
 	const [formData, setFormData] = useState({
+		id: nanoid(),
 		status: '',
 		task: ''
 	});
+	const dispatch = useDispatch();
 
 	const handleInputChange = (e) => {
 		const { name, value } = e.target;
@@ -18,6 +23,7 @@ export const MyModal = ({ isModalActive, setActive }) => {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		console.log(formData);
+		dispatch(addTask(formData));
 		setActive(false);
 	};
 
@@ -39,8 +45,8 @@ export const MyModal = ({ isModalActive, setActive }) => {
 							<option value="" disabled>
 								Select status | Default status
 							</option>
-							<option value="completed">Completed</option>
-							<option value="notCompleted">Not Completed</option>
+							<option value={true}>Completed</option>
+							<option value={false}>Not Completed</option>
 						</Form.Control>
 					</Form.Group>
 

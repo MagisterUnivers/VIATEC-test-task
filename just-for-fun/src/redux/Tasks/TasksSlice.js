@@ -9,19 +9,20 @@ export const tasksSlice = createSlice({
 	initialState,
 	reducers: {
 		addTask(state, { payload }) {
-			state.favorite.push(payload);
+			state.tasks.push(payload);
 		},
 		removeTask(state, { payload }) {
-			state.favorite = state.favorite.filter((el) => el.id !== payload);
+			state.tasks = state.tasks.filter((el) => el.task === payload.task);
 		},
 		editTask(state, { payload }) {
-			state.favorite.push(payload);
+			state.tasks.push(payload);
 		},
 		updateTaskStatus(state, { payload }) {
-			state.favorite.push(payload);
+			state.tasks.push(payload);
 		}
 	}
 });
 
-export const { addFavorite, removeFavorite } = tasksSlice.actions;
-export const favoriteReducer = tasksSlice.reducer;
+export const { addTask, removeTask, editTask, updateTaskStatus } =
+	tasksSlice.actions;
+export const tasksReducer = tasksSlice.reducer;

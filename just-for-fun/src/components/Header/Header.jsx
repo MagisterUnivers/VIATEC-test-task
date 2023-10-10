@@ -26,7 +26,11 @@ const Header = () => {
 					<span className="navbar-toggler-icon"></span>
 				</button> */}
 
-				<div className="collapse navbar-collapse" id="navbarNav">
+				<div
+					className="collapse navbar-collapse"
+					id="navbarNav"
+					style={{ justifyContent: 'center' }}
+				>
 					<ul className="navbar-nav ml-auto" style={{ alignItems: 'center' }}>
 						<li className="nav-item">
 							<Link to="/main/home" className="nav-link">
