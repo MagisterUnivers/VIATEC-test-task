@@ -33,7 +33,6 @@ const TasksPage = () => {
 					className="col-md-1"
 					style={{
 						border: '3px solid rgb(13,110,253)',
-						height: '100vh',
 						borderTop: '0'
 					}}
 				></div>

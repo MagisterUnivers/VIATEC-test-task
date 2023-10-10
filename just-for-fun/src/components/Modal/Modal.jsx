@@ -22,8 +22,8 @@ export const MyModal = ({ setActive }) => {
 		id !== undefined ? tasks.find((el) => el.id === id) : '';
 
 	useEffect(() => {
-		if (task !== undefined) setFormData({ status, task, name, id: nanoid() });
-	}, [status, task, name]);
+		if (task !== undefined) setFormData({ status, task, name, id });
+	}, [status, task, name, id]);
 
 	const handleInputChange = (e) => {
 		const { name, value } = e.target;
