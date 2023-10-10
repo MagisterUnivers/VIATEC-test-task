@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Button } from './Button/Button';
-import { Modal } from './Modal/Modal';
+import { MyModal } from '../components/Modal/Modal';
 
 export const App = () => {
 	const [isModalActive, setIsModalActive] = useState(false);
@@ -22,9 +22,10 @@ export const App = () => {
 				onClick={() => setIsModalActive(true)}
 			/>
 			{isModalActive && (
-				<Modal isModalActive={isModalActive} setActive={setIsModalActive}>
-					<p>Hello</p>
-				</Modal>
+				<MyModal
+					isModalActive={isModalActive}
+					setActive={setIsModalActive}
+				></MyModal>
 			)}
 		</>
 	);
