@@ -21,6 +21,7 @@ const TasksPage = () => {
 							.map((task) => (
 								<TaskCard
 									task={task.task}
+									name={task.name}
 									status={task.status}
 									id={task.id}
 									key={nanoid()}
@@ -39,6 +40,7 @@ const TasksPage = () => {
 							.map((task) => (
 								<TaskCard
 									task={task.task}
+									name={task.name}
 									status={task.status}
 									id={task.id}
 									key={nanoid()}

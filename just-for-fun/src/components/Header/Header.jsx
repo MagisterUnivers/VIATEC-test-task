@@ -1,13 +1,11 @@
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '../Button/Button';
-import { useState } from 'react';
 import { openModal } from '../../redux/Modal/ModalSlice';
 import { useDispatch } from 'react-redux';
 
 const Header = () => {
 	const location = useLocation();
 	const dispatch = useDispatch();
-	const [isModalActive, setIsModalActive] = useState(false);
 
 	return (
 		<nav className="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -52,9 +50,6 @@ const Header = () => {
 					</ul>
 				</div>
 			</div>
-			{/* {isModalActive && (
-				<MyModal isModalActive={isModalActive} setActive={setIsModalActive} />
-			)} */}
 		</nav>
 	);
 };

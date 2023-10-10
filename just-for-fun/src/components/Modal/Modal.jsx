@@ -9,19 +9,21 @@ import { openModal } from '../../redux/Modal/ModalSlice';
 export const MyModal = ({ isModalActive, setActive, taskId }) => {
 	const [formData, setFormData] = useState({
 		id: nanoid(),
+		name: '',
 		status: 'false',
 		task: ''
 	});
 	const dispatch = useDispatch();
 	const modal = useSelector(selectModalState);
 	const { tasks } = useSelector(selectAllTasks);
+
 	const { isModalOpen, id } = modal;
-	const { task, status } =
+	const { task, status, name } =
 		id !== undefined ? tasks.find((el) => el.id === id) : '';
 
 	useEffect(() => {
-		if (task !== undefined) setFormData({ status, task, id });
-	}, [status, task, id]);
+		if (task !== undefined) setFormData({ status, task, name, id });
+	}, [status, task, name, id]);
 
 	const handleInputChange = (e) => {
 		const { name, value } = e.target;
@@ -45,7 +47,7 @@ export const MyModal = ({ isModalActive, setActive, taskId }) => {
 			</Modal.Header>
 			<Modal.Body>
 				<Form onSubmit={handleSubmit}>
-					<Form.Group controlId="status">
+					<Form.Group controlId="status" style={{ marginBottom: '5px' }}>
 						<Form.Label>Status</Form.Label>
 						<Form.Control
 							as="select"
@@ -61,18 +63,31 @@ export const MyModal = ({ isModalActive, setActive, taskId }) => {
 						</Form.Control>
 					</Form.Group>
 
-					<Form.Group controlId="task">
+					<Form.Group controlId="task" style={{ marginBottom: '5px' }}>
+						<Form.Label>Task name</Form.Label>
+						<Form.Control
+							type="text"
+							name="name"
+							required={true}
+							placeholder="Task name here"
+							value={formData.name}
+							onChange={handleInputChange}
+						/>
+					</Form.Group>
+
+					<Form.Group controlId="task" style={{ marginBottom: '5px' }}>
 						<Form.Label>Task description</Form.Label>
 						<Form.Control
 							type="text"
 							name="task"
-							placeholder="Task description"
+							required={true}
+							placeholder="Task description here"
 							value={formData.task}
 							onChange={handleInputChange}
 						/>
 					</Form.Group>
 
-					<Modal.Footer>
+					<Modal.Footer style={{ borderTop: 'none' }}>
 						<Button variant="secondary" onClick={() => setActive(false)}>
 							Close
 						</Button>

@@ -1,23 +1,26 @@
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { removeTask } from '../../redux/Tasks/TasksSlice';
-import { selectModalState } from '../../redux/selectors';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import {
+	removeTask,
+	updateStatusByCheckbox
+} from '../../redux/Tasks/TasksSlice';
 import { openModal } from '../../redux/Modal/ModalSlice';
+import Notiflix from 'notiflix';
 
-const TaskCard = ({ task, status, id }) => {
+const TaskCard = ({ task, name, status, id }) => {
 	const dispatch = useDispatch();
-	const modal = useSelector(selectModalState);
+	const [isChecked, setIsChecked] = useState(status === 'true');
 
 	const handleDelete = (taskId) => {
-		console.log(taskId);
 		dispatch(removeTask(taskId));
 	};
 
 	return (
 		<li>
-			<h3>{task}</h3>
+			<h3>{name}</h3>
+			<p>{task}</p>
 			<div style={{ display: 'flex' }}>
-				<p>Status: {status}</p>
+				<p>Status: {status === 'true' ? 'Done' : 'Undone'}</p>
 				{status === 'true' ? (
 					<div
 						className="rounded-circle bg-success"
@@ -29,6 +32,23 @@ const TaskCard = ({ task, status, id }) => {
 						style={{ width: '8px', height: '8px' }}
 					></div>
 				)}
+
+				<div className="form-check" style={{ marginLeft: '15px' }}>
+					<input
+						className="form-check-input"
+						type="checkbox"
+						id="Checkbox"
+						checked={isChecked}
+						onChange={() => {
+							setIsChecked(!isChecked);
+							dispatch(updateStatusByCheckbox(id));
+						}}
+					/>
+					<label className="form-check-label" htmlFor="Checkbox">
+						Task done | undone
+					</label>
+				</div>
+
 				<div style={{ marginLeft: 'auto' }}>
 					<button
 						type="button"
@@ -42,7 +62,19 @@ const TaskCard = ({ task, status, id }) => {
 					<button
 						type="button"
 						onClick={() => {
-							handleDelete(id);
+							Notiflix.Confirm.show(
+								'Action Confirmation',
+								'Do you really want to delete that task?',
+								'Yes',
+								'No',
+								() => {
+									handleDelete(id);
+								},
+								() => {
+									alert('If you say so...');
+								},
+								{}
+							);
 						}}
 						style={{ border: 'none', background: 'none' }}
 					>

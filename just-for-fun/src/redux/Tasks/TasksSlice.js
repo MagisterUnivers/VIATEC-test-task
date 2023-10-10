@@ -14,11 +14,17 @@ export const tasksSlice = createSlice({
 		removeTask(state, { payload }) {
 			state.tasks = state.tasks.filter((el) => el.id !== payload);
 		},
-		editTask(state, { payload }) {
-			state.tasks.push(payload);
+		updateStatusByCheckbox(state, { payload }) {
+			console.log(payload);
+			const search = state.tasks.findIndex((e) => e.id === payload);
+
+			if (search !== -1) {
+				state.tasks[search].status === 'true'
+					? (state.tasks[search].status = 'false')
+					: (state.tasks[search].status = 'true');
+			}
 		},
 		updateTaskStatus(state, { payload }) {
-			console.log(payload);
 			const search = state.tasks.findIndex((e) => e.id === payload.id);
 
 			if (search !== -1) {
@@ -28,6 +34,6 @@ export const tasksSlice = createSlice({
 	}
 });
 
-export const { addTask, removeTask, editTask, updateTaskStatus } =
+export const { addTask, removeTask, updateTaskStatus, updateStatusByCheckbox } =
 	tasksSlice.actions;
 export const tasksReducer = tasksSlice.reducer;
