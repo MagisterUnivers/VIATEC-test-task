@@ -13,9 +13,9 @@ const TasksPage = () => {
 		<div className="container">
 			<div className="row">
 				<div className="col-md-6">
-					<h2>Done</h2>
+					<h2 className="categoryTitle text-success">Completed</h2>
 
-					<ul>
+					<ul className="categoryList">
 						{tasks.tasks
 							.filter((task) => task.status === 'true')
 							.map((task) => (
@@ -29,12 +29,19 @@ const TasksPage = () => {
 							))}
 					</ul>
 				</div>
-				<div className="col-md-1 divider">{/* Vertical Line */}</div>
+				<div
+					className="col-md-1"
+					style={{
+						border: '3px solid rgb(13,110,253)',
+						height: '100vh',
+						borderTop: '0'
+					}}
+				></div>
 
 				<div className="col-md-5">
-					<h2>Undone</h2>
+					<h2 className="categoryTitle text-danger">Not Completed</h2>
 
-					<ul>
+					<ul className="categoryList">
 						{tasks.tasks
 							.filter((task) => task.status === 'false')
 							.map((task) => (

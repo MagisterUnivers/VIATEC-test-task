@@ -4,6 +4,7 @@ import TasksPage from '../pages/TasksPage/TasksPage';
 import { PublicRoute } from '../routes/PublicRoute';
 import { Layout } from '../components/Layout/Layout';
 import WelcomeButtons from './WelcomeButtons/WelcomeButtons';
+import '../index.css';
 
 export const App = () => {
 	return (

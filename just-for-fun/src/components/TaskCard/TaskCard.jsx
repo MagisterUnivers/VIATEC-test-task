@@ -16,10 +16,10 @@ const TaskCard = ({ task, name, status, id }) => {
 	};
 
 	return (
-		<li>
-			<h3>{name}</h3>
-			<p>{task}</p>
-			<div style={{ display: 'flex' }}>
+		<li className="border p-3">
+			<h3 style={{ wordWrap: 'break-word' }}>{name}</h3>
+			<p style={{ wordWrap: 'break-word', width: '600px' }}>{task}</p>
+			<div style={{ display: 'flex', alignItems: 'center' }}>
 				<p>Status: {status === 'true' ? 'Done' : 'Undone'}</p>
 				{status === 'true' ? (
 					<div
@@ -33,7 +33,7 @@ const TaskCard = ({ task, name, status, id }) => {
 					></div>
 				)}
 
-				<div className="form-check" style={{ marginLeft: '15px' }}>
+				<div className="form-check containerCheckbox">
 					<input
 						className="form-check-input"
 						type="checkbox"
@@ -49,10 +49,10 @@ const TaskCard = ({ task, name, status, id }) => {
 					</label>
 				</div>
 
-				<div style={{ marginLeft: 'auto' }}>
+				<div style={{ marginLeft: 'auto', display: 'flex', gap: '5px' }}>
 					<button
 						type="button"
-						style={{ border: 'none', background: 'none' }}
+						className="btn btn-primary"
 						onClick={() => {
 							dispatch(openModal(id));
 						}}
@@ -61,6 +61,8 @@ const TaskCard = ({ task, name, status, id }) => {
 					</button>
 					<button
 						type="button"
+						className="btn btn-secondary"
+						style={{ backgroundColor: 'red' }}
 						onClick={() => {
 							Notiflix.Confirm.show(
 								'Action Confirmation',
@@ -76,7 +78,6 @@ const TaskCard = ({ task, name, status, id }) => {
 								{}
 							);
 						}}
-						style={{ border: 'none', background: 'none' }}
 					>
 						Delete
 					</button>

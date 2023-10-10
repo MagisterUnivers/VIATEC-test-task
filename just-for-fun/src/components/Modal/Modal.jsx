@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { Modal, Form, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { addTask, updateTaskStatus } from '../../redux/Tasks/TasksSlice';
-import { nanoid } from '@reduxjs/toolkit';
 import { selectAllTasks, selectModalState } from '../../redux/selectors';
-import { openModal } from '../../redux/Modal/ModalSlice';
+import { openModal, resetId } from '../../redux/Modal/ModalSlice';
+import { nanoid } from 'nanoid';
 
-export const MyModal = ({ isModalActive, setActive, taskId }) => {
+export const MyModal = ({ setActive }) => {
 	const [formData, setFormData] = useState({
 		id: nanoid(),
 		name: '',
@@ -18,12 +18,12 @@ export const MyModal = ({ isModalActive, setActive, taskId }) => {
 	const { tasks } = useSelector(selectAllTasks);
 
 	const { isModalOpen, id } = modal;
-	const { task, status, name } =
-		id !== undefined ? tasks.find((el) => el.id === id) : '';
+	// const { task, status, name } =
+	// 	id !== undefined ? tasks.find((el) => el.id === id) : '';
 
-	useEffect(() => {
-		if (task !== undefined) setFormData({ status, task, name, id });
-	}, [status, task, name, id]);
+	// useEffect(() => {
+	// 	if (task !== undefined) setFormData({ status, task, name, id: nanoid() });
+	// }, [status, task, name]);
 
 	const handleInputChange = (e) => {
 		const { name, value } = e.target;
@@ -38,6 +38,7 @@ export const MyModal = ({ isModalActive, setActive, taskId }) => {
 		console.log(formData);
 		id ? dispatch(updateTaskStatus(formData)) : dispatch(addTask(formData));
 		dispatch(openModal());
+		dispatch(resetId());
 	};
 
 	return (

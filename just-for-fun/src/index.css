@@ -22,12 +22,6 @@ html {
   scroll-behavior: smooth;
 }
 
-*,
-*::before,
-*::after {
-  box-sizing: inherit;
-}
-
 h1,
 h2,
 h3,
@@ -42,7 +36,7 @@ p {
 ul,
 ol,
 li {
-  list-style: none;
+  list-style: none !important;
   margin: 0;
   padding: 0;
 }
@@ -72,4 +66,31 @@ textarea {
 
 input {
   font-family: inherit;
+}
+
+/**
+  |============================
+  | Text styles
+  |============================
+*/
+
+.categoryTitle {
+  margin-top: 10px;
+  text-align: center;
+  outline: transparent;
+}
+
+
+.categoryList {
+  margin-top: 15px;
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+}
+
+.containerCheckbox {
+  margin-left: 15px;
+  align-items: center;
+  display: flex;
+  gap: 5px;
 }
