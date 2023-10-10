@@ -1,32 +1,34 @@
-import { useEffect, useState } from 'react';
-import { Button } from './Button/Button';
-import { MyModal } from '../components/Modal/Modal';
+import { Route, Routes } from 'react-router';
+import { HomePage } from '../pages/HomePage/HomePage';
+import TasksPage from '../pages/TasksPage/TasksPage';
+import { PublicRoute } from '../routes/PublicRoute';
+import { Layout } from '../components/Layout/Layout';
+import WelcomeButtons from './WelcomeButtons/WelcomeButtons';
 
 export const App = () => {
-	const [isModalActive, setIsModalActive] = useState(false);
-
-	useEffect(() => {
-		if (isModalActive) {
-			document.body.classList.add('modal-open');
-		} else {
-			document.body.classList.remove('modal-open');
-		}
-	}, [isModalActive]);
-
 	return (
 		<>
-			<Button
-				text="Add task"
-				width="232px"
-				height="60px"
-				onClick={() => setIsModalActive(true)}
-			/>
-			{isModalActive && (
-				<MyModal
-					isModalActive={isModalActive}
-					setActive={setIsModalActive}
-				></MyModal>
-			)}
+			<Routes>
+				<Route path="/" element={<WelcomeButtons />} />
+				<Route path="/main" element={<Layout />}>
+					<Route
+						path="tasks"
+						element={
+							<PublicRoute>
+								<TasksPage />
+							</PublicRoute>
+						}
+					/>
+					<Route
+						path="home"
+						element={
+							<PublicRoute>
+								<HomePage />
+							</PublicRoute>
+						}
+					/>
+				</Route>
+			</Routes>
 		</>
 	);
 };
