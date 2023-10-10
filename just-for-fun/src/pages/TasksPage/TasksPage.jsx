@@ -16,9 +16,15 @@ const TasksPage = () => {
 					<h2>Done</h2>
 
 					<ul>
-						<li>
-							<h4>Hello, test</h4>
-						</li>
+						{tasks.tasks
+							.filter((task) => task.status === 'true')
+							.map((task) => (
+								<TaskCard
+									task={task.task}
+									status={task.status}
+									key={nanoid()}
+								/>
+							))}
 					</ul>
 				</div>
 				<div className="col-md-1 divider">{/* Vertical Line */}</div>
@@ -27,12 +33,15 @@ const TasksPage = () => {
 					<h2>Undone</h2>
 
 					<ul>
-						{tasks.tasks.map((e) => {
-							console.log(e);
-							return (
-								<TaskCard task={e.task} status={e.status} key={nanoid()} />
-							);
-						})}
+						{tasks.tasks
+							.filter((task) => task.status === 'false')
+							.map((task) => (
+								<TaskCard
+									task={task.task}
+									status={task.status}
+									key={nanoid()}
+								/>
+							))}
 					</ul>
 				</div>
 			</div>
