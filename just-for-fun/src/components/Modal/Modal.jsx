@@ -2,28 +2,22 @@ import React, { useState } from 'react';
 import { Modal, Form, Button } from 'react-bootstrap';
 
 export const MyModal = ({ isModalActive, setActive }) => {
-	// Создайте состояние для значений полей формы
 	const [formData, setFormData] = useState({
 		status: '',
 		task: ''
 	});
 
-	// Обработчик изменения значения в полях формы
 	const handleInputChange = (e) => {
 		const { name, value } = e.target;
-		// Обновите соответствующее значение в состоянии
 		setFormData({
 			...formData,
 			[name]: value
 		});
 	};
 
-	// Обработчик отправки формы
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		// Здесь вы можете отправить данные из formData, куда внесены значения формы
 		console.log(formData);
-		// Закройте модальное окно
 		setActive(false);
 	};
 
