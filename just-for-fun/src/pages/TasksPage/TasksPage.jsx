@@ -1,9 +1,9 @@
 import React from 'react';
-import { TestTasks } from '../../utils/mockData';
 import TaskCard from '../../components/TaskCard/TaskCard';
 import { useSelector } from 'react-redux';
 import { selectAllTasks } from '../../redux/selectors';
 import { nanoid } from '@reduxjs/toolkit';
+import { MyModal } from '../../components/Modal/Modal';
 
 const TasksPage = () => {
 	const tasks = useSelector(selectAllTasks);
@@ -22,6 +22,7 @@ const TasksPage = () => {
 								<TaskCard
 									task={task.task}
 									status={task.status}
+									id={task.id}
 									key={nanoid()}
 								/>
 							))}
@@ -39,12 +40,14 @@ const TasksPage = () => {
 								<TaskCard
 									task={task.task}
 									status={task.status}
+									id={task.id}
 									key={nanoid()}
 								/>
 							))}
 					</ul>
 				</div>
 			</div>
+			<MyModal />
 		</div>
 	);
 };

@@ -1,16 +1,27 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Modal, Form, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { addTask } from '../../redux/Tasks/TasksSlice';
+import { addTask, updateTaskStatus } from '../../redux/Tasks/TasksSlice';
 import { nanoid } from '@reduxjs/toolkit';
+import { selectAllTasks, selectModalState } from '../../redux/selectors';
+import { openModal } from '../../redux/Modal/ModalSlice';
 
-export const MyModal = ({ isModalActive, setActive }) => {
+export const MyModal = ({ isModalActive, setActive, taskId }) => {
 	const [formData, setFormData] = useState({
 		id: nanoid(),
-		status: '',
+		status: 'false',
 		task: ''
 	});
 	const dispatch = useDispatch();
+	const modal = useSelector(selectModalState);
+	const { tasks } = useSelector(selectAllTasks);
+	const { isModalOpen, id } = modal;
+	const { task, status } =
+		id !== undefined ? tasks.find((el) => el.id === id) : '';
+
+	useEffect(() => {
+		if (task !== undefined) setFormData({ status, task, id });
+	}, [status, task, id]);
 
 	const handleInputChange = (e) => {
 		const { name, value } = e.target;
@@ -23,12 +34,12 @@ export const MyModal = ({ isModalActive, setActive }) => {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		console.log(formData);
-		dispatch(addTask(formData));
-		setActive(false);
+		id ? dispatch(updateTaskStatus(formData)) : dispatch(addTask(formData));
+		dispatch(openModal());
 	};
 
 	return (
-		<Modal show={isModalActive} onHide={() => setActive(false)}>
+		<Modal show={isModalOpen} onHide={() => dispatch(openModal())}>
 			<Modal.Header closeButton>
 				<Modal.Title>Task manager</Modal.Title>
 			</Modal.Header>
@@ -65,9 +76,15 @@ export const MyModal = ({ isModalActive, setActive }) => {
 						<Button variant="secondary" onClick={() => setActive(false)}>
 							Close
 						</Button>
-						<Button variant="primary" type="submit">
-							Add task
-						</Button>
+						{id ? (
+							<Button variant="primary" type="submit">
+								Edit task
+							</Button>
+						) : (
+							<Button variant="primary" type="submit">
+								Add task
+							</Button>
+						)}
 					</Modal.Footer>
 				</Form>
 			</Modal.Body>

@@ -12,13 +12,18 @@ export const tasksSlice = createSlice({
 			state.tasks.push(payload);
 		},
 		removeTask(state, { payload }) {
-			state.tasks = state.tasks.filter((el) => el.task === payload.task);
+			state.tasks = state.tasks.filter((el) => el.id !== payload);
 		},
 		editTask(state, { payload }) {
 			state.tasks.push(payload);
 		},
 		updateTaskStatus(state, { payload }) {
-			state.tasks.push(payload);
+			console.log(payload);
+			const search = state.tasks.findIndex((e) => e.id === payload.id);
+
+			if (search !== -1) {
+				state.tasks.splice(search, 1, payload);
+			}
 		}
 	}
 });

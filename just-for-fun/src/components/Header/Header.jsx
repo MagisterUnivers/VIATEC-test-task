@@ -1,10 +1,12 @@
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '../Button/Button';
 import { useState } from 'react';
-import { MyModal } from '../Modal/Modal';
+import { openModal } from '../../redux/Modal/ModalSlice';
+import { useDispatch } from 'react-redux';
 
 const Header = () => {
 	const location = useLocation();
+	const dispatch = useDispatch();
 	const [isModalActive, setIsModalActive] = useState(false);
 
 	return (
@@ -44,21 +46,15 @@ const Header = () => {
 						</li>
 						{location.pathname === '/main/tasks' && (
 							<li>
-								<Button
-									text="Add task"
-									onClick={() => setIsModalActive(true)}
-								/>
+								<Button text="Add task" onClick={() => dispatch(openModal())} />
 							</li>
 						)}
 					</ul>
 				</div>
 			</div>
-			{isModalActive && (
-				<MyModal
-					isModalActive={isModalActive}
-					setActive={setIsModalActive}
-				></MyModal>
-			)}
+			{/* {isModalActive && (
+				<MyModal isModalActive={isModalActive} setActive={setIsModalActive} />
+			)} */}
 		</nav>
 	);
 };

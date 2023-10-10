@@ -11,6 +11,7 @@ import {
 	REGISTER
 } from 'redux-persist';
 import { tasksReducer } from './Tasks/TasksSlice';
+import { ModalReducer } from './Modal/ModalSlice';
 
 const persistConfig = {
 	key: 'root',
@@ -20,7 +21,8 @@ const persistConfig = {
 };
 
 const rootReducer = combineReducers({
-	tasks: tasksReducer
+	tasks: tasksReducer,
+	modal: ModalReducer
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
