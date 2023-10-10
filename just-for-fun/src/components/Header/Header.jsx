@@ -1,6 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '../Button/Button';
-import { openModal, resetId } from '../../redux/Modal/ModalSlice';
+import { openModal } from '../../redux/Modal/ModalSlice';
 import { useDispatch } from 'react-redux';
 
 const Header = () => {
@@ -47,7 +47,6 @@ const Header = () => {
 								<Button
 									text="Add task"
 									onClick={() => {
-										dispatch(resetId());
 										dispatch(openModal());
 									}}
 								/>

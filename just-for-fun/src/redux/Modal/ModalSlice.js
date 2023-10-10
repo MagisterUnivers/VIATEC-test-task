@@ -13,12 +13,9 @@ export const ModalSlice = createSlice({
 			console.log(payload);
 			state.id = payload;
 			state.isModalOpen = !state.isModalOpen;
-		},
-		resetId(state) {
-			state.id = undefined;
 		}
 	}
 });
 
-export const { openModal, resetId } = ModalSlice.actions;
+export const { openModal } = ModalSlice.actions;
 export const ModalReducer = ModalSlice.reducer;
