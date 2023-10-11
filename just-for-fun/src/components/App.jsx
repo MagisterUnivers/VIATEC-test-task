@@ -29,6 +29,7 @@ export const App = () => {
 						}
 					/>
 				</Route>
+				<Route path="*" element={<WelcomeButtons />} />
 			</Routes>
 		</>
 	);
