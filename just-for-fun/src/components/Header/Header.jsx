@@ -1,7 +1,7 @@
 import { Link, useLocation } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { Button } from '../Button/Button';
 import { openModal } from '../../redux/Modal/ModalSlice';
-import { useDispatch } from 'react-redux';
 
 const Header = () => {
 	const location = useLocation();
@@ -10,7 +10,7 @@ const Header = () => {
 	return (
 		<nav className="navbar navbar-expand-lg navbar-dark bg-primary">
 			<div className="container">
-				<Link to="/" className="navbar-brand">
+				<Link to="/" className="navbar-brand logo">
 					Task Manager
 				</Link>
 
@@ -31,14 +31,17 @@ const Header = () => {
 					id="navbarNav"
 					style={{ justifyContent: 'center' }}
 				>
-					<ul className="navbar-nav ml-auto" style={{ alignItems: 'center' }}>
+					<ul
+						className="navbar-nav ml-auto"
+						style={{ alignItems: 'center', fontSize: '20px' }}
+					>
 						<li className="nav-item">
-							<Link to="/main/home" className="nav-link">
+							<Link to="/main/home" className="nav-link link-hover">
 								Home
 							</Link>
 						</li>
 						<li className="nav-item">
-							<Link to="/main/tasks" className="nav-link">
+							<Link to="/main/tasks" className="nav-link link-hover">
 								Tasks
 							</Link>
 						</li>

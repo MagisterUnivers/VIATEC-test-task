@@ -1,8 +1,8 @@
 import React from 'react';
-import TaskCard from '../../components/TaskCard/TaskCard';
 import { useSelector } from 'react-redux';
-import { selectAllTasks } from '../../redux/selectors';
 import { nanoid } from 'nanoid';
+import TaskCard from '../../components/TaskCard/TaskCard';
+import { selectAllTasks } from '../../redux/selectors';
 import { MyModal } from '../../components/Modal/Modal';
 
 const TasksPage = () => {

@@ -94,3 +94,27 @@ input {
   display: flex;
   gap: 5px;
 }
+
+.link-hover {
+  color: initial;
+  transition: color 0.8s;
+}
+
+.link-hover:hover {
+  color: rgb(168, 242, 7);
+}
+
+.logo {
+  font-size: 25px;
+  transition: font-size 0.5s ease, color 0.5s ease;
+}
+
+.logo:hover {
+  font-size: 28px;
+  color: rgb(168, 242, 7);
+}
+
+.homePage-text__title {
+  font-size: 20px;
+  text-align: center;
+}

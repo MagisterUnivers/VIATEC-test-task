@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import Notiflix from 'notiflix';
 import {
 	removeTask,
 	updateStatusByCheckbox
 } from '../../redux/Tasks/TasksSlice';
 import { openModal } from '../../redux/Modal/ModalSlice';
-import Notiflix from 'notiflix';
 
 const TaskCard = ({ task, name, status, id }) => {
 	const dispatch = useDispatch();

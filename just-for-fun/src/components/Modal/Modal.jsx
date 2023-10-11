@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Modal, Form, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
+import { nanoid } from 'nanoid';
 import { addTask, updateTaskStatus } from '../../redux/Tasks/TasksSlice';
 import { selectAllTasks, selectModalState } from '../../redux/selectors';
 import { openModal } from '../../redux/Modal/ModalSlice';
-import { nanoid } from 'nanoid';
 
-export const MyModal = ({ setActive }) => {
+export const MyModal = () => {
 	const [formData, setFormData] = useState({
 		id: nanoid(),
 		name: '',
@@ -25,6 +25,10 @@ export const MyModal = ({ setActive }) => {
 		if (task !== undefined) setFormData({ status, task, name, id });
 	}, [status, task, name, id]);
 
+	const dataEraser = () => {
+		return setFormData({ id: nanoid(), name: '', status: 'false', task: '' });
+	};
+
 	const handleInputChange = (e) => {
 		const { name, value } = e.target;
 		setFormData({
@@ -38,11 +42,17 @@ export const MyModal = ({ setActive }) => {
 		console.log(formData);
 		id ? dispatch(updateTaskStatus(formData)) : dispatch(addTask(formData));
 		dispatch(openModal());
-		setFormData({ id: nanoid(), name: '', status: 'false', task: '' });
+		dataEraser();
 	};
 
 	return (
-		<Modal show={isModalOpen} onHide={() => dispatch(openModal())}>
+		<Modal
+			show={isModalOpen}
+			onHide={() => {
+				dispatch(openModal());
+				dataEraser();
+			}}
+		>
 			<Modal.Header closeButton>
 				<Modal.Title>Task manager</Modal.Title>
 			</Modal.Header>
@@ -89,7 +99,7 @@ export const MyModal = ({ setActive }) => {
 					</Form.Group>
 
 					<Modal.Footer style={{ borderTop: 'none' }}>
-						<Button variant="secondary" onClick={() => setActive(false)}>
+						<Button variant="secondary" onClick={() => dispatch(openModal())}>
 							Close
 						</Button>
 						{id ? (
