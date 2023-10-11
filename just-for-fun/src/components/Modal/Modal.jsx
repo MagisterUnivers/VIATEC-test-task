@@ -91,7 +91,6 @@ export const MyModal = () => {
 						<Form.Control
 							type="text"
 							name="task"
-							required={true}
 							placeholder="Task description here"
 							value={formData.task}
 							onChange={handleInputChange}
