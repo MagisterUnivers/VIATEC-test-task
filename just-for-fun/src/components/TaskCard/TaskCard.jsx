@@ -17,8 +17,8 @@ const TaskCard = ({ task, name, status, id }) => {
 
 	return (
 		<li className="border p-3 task-card">
-			<h3 style={{ wordWrap: 'break-word' }}>{name}</h3>
-			<p style={{ wordWrap: 'break-word' }}>{task}</p>
+			<h3 style={{ wordWrap: 'break-word', marginBottom: '5px' }}>{name}</h3>
+			<p style={{ wordWrap: 'break-word', marginBottom: '5px' }}>{task}</p>
 			<div style={{ display: 'flex', alignItems: 'center' }}>
 				<p>Status: {status === 'true' ? 'Done' : 'Undone'}</p>
 				{status === 'true' ? (
